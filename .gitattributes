@@ -33,3 +33,15 @@ saved_model/**/* filter=lfs diff=lfs merge=lfs -text
 *.zip filter=lfs diff=lfs merge=lfs -text
 *.zst filter=lfs diff=lfs merge=lfs -text
 *tfevents* filter=lfs diff=lfs merge=lfs -text
+sexyGPT-Uncensored-Q2_K.gguf filter=lfs diff=lfs merge=lfs -text
+sexyGPT-Uncensored-Q3_K_L.gguf filter=lfs diff=lfs merge=lfs -text
+sexyGPT-Uncensored-Q3_K_M.gguf filter=lfs diff=lfs merge=lfs -text
+sexyGPT-Uncensored-Q3_K_S.gguf filter=lfs diff=lfs merge=lfs -text
+sexyGPT-Uncensored-Q4_0.gguf filter=lfs diff=lfs merge=lfs -text
+sexyGPT-Uncensored-Q4_K_M.gguf filter=lfs diff=lfs merge=lfs -text
+sexyGPT-Uncensored-Q4_K_S.gguf filter=lfs diff=lfs merge=lfs -text
+sexyGPT-Uncensored-Q5_0.gguf filter=lfs diff=lfs merge=lfs -text
+sexyGPT-Uncensored-Q5_K_M.gguf filter=lfs diff=lfs merge=lfs -text
+sexyGPT-Uncensored-Q5_K_S.gguf filter=lfs diff=lfs merge=lfs -text
+sexyGPT-Uncensored-Q6_K.gguf filter=lfs diff=lfs merge=lfs -text
+sexyGPT-Uncensored-Q8_0.gguf filter=lfs diff=lfs merge=lfs -text
