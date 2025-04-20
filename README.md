@@ -23,12 +23,47 @@ This repo contains GGUF format model files for [hooking-dev/sexyGPT-Uncensored](
 
 The files were quantized using machines provided by [TensorBlock](https://tensorblock.co/), and they are compatible with llama.cpp as of [commit b4242](https://github.com/ggerganov/llama.cpp/commit/a6744e43e80f4be6398fc7733a01642c846dce1d).
 
-<div style="text-align: left; margin: 20px 0;">
-    <a href="https://tensorblock.co/waitlist/client" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
-        Run them on the TensorBlock client using your local machine ↗
-    </a>
-</div>
-
+## Our projects
+<table border="1" cellspacing="0" cellpadding="10">
+<tr>
+  <th style="font-size: 25px;">Awesome MCP Servers</th>
+  <th style="font-size: 25px;">TensorBlock Studio</th>
+</tr>
+  <tr>
+    <th><img src="https://imgur.com/2Xov7B7.jpeg" alt="Project A" width="450"/></th>
+    <th><img src="https://imgur.com/pJcmF5u.jpeg" alt="Project B" width="450"/></th>
+  </tr>
+  <tr>
+    <th>A comprehensive collection of Model Context Protocol (MCP) servers.</th>
+    <th>A lightweight, open, and extensible multi-LLM interaction studio.</th>
+  </tr>
+<tr>
+  <th>
+    <a href="https://github.com/TensorBlock/awesome-mcp-servers" target="_blank" style="
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #FF7F50;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-family: sans-serif;
+    ">👀 See what we built 👀</a>
+  </th>
+  <th>
+    <a href="https://github.com/TensorBlock/TensorBlock-Studio" target="_blank" style="
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #FF7F50;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-family: sans-serif;
+    ">👀 See what we built 👀</a>
+  </th>
+</tr>
+</table>
 ## Prompt template
 
 ```
