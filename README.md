@@ -9,13 +9,13 @@ tags:
 <div style="width: auto; margin-left: auto; margin-right: auto">
 <img src="https://i.imgur.com/jC7kdl8.jpeg" alt="TensorBlock" style="width: 100%; min-width: 400px; display: block; margin: auto;">
 </div>
-<div style="display: flex; justify-content: space-between; width: 100%;">
-    <div style="display: flex; flex-direction: column; align-items: flex-start;">
-        <p style="margin-top: 0.5em; margin-bottom: 0em;">
-            Feedback and support: TensorBlock's  <a href="https://x.com/tensorblock_aoi">Twitter/X</a>, <a href="https://t.me/TensorBlock">Telegram Group</a> and <a href="https://x.com/tensorblock_aoi">Discord server</a>
-        </p>
-    </div>
-</div>
+
+[![Website](https://img.shields.io/badge/Website-tensorblock.co-blue?logo=google-chrome&logoColor=white)](https://tensorblock.co)
+[![Twitter](https://img.shields.io/twitter/follow/tensorblock_aoi?style=social)](https://twitter.com/tensorblock_aoi)
+[![Discord](https://img.shields.io/badge/Discord-Join%20Us-5865F2?logo=discord&logoColor=white)](https://discord.gg/Ej5NmeHFf2)
+[![GitHub](https://img.shields.io/badge/GitHub-TensorBlock-black?logo=github&logoColor=white)](https://github.com/TensorBlock)
+[![Telegram](https://img.shields.io/badge/Telegram-Group-blue?logo=telegram)](https://t.me/TensorBlock)
+
 
 ## hooking-dev/sexyGPT-Uncensored - GGUF
 
