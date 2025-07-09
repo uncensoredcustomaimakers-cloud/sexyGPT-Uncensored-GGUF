@@ -25,44 +25,70 @@ The files were quantized using machines provided by [TensorBlock](https://tensor
 
 ## Our projects
 <table border="1" cellspacing="0" cellpadding="10">
-<tr>
-  <th style="font-size: 25px;">Awesome MCP Servers</th>
-  <th style="font-size: 25px;">TensorBlock Studio</th>
-</tr>
   <tr>
-    <th><img src="https://imgur.com/2Xov7B7.jpeg" alt="Project A" width="450"/></th>
-    <th><img src="https://imgur.com/pJcmF5u.jpeg" alt="Project B" width="450"/></th>
+    <th colspan="2" style="font-size: 25px;">Forge</th>
+  </tr>
+  <tr>
+    <th colspan="2">
+      <img src="https://imgur.com/faI5UKh.jpeg" alt="Forge Project" width="900"/>
+    </th>
+  </tr>
+  <tr>
+    <th colspan="2">An OpenAI-compatible multi-provider routing layer.</th>
+  </tr>
+  <tr>
+    <th colspan="2">
+      <a href="https://github.com/TensorBlock/forge" target="_blank" style="
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #FF7F50;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+        font-family: sans-serif;
+      ">🚀 Try it now! 🚀</a>
+    </th>
+  </tr>
+
+  <tr>
+    <th style="font-size: 25px;">Awesome MCP Servers</th>
+    <th style="font-size: 25px;">TensorBlock Studio</th>
+  </tr>
+  <tr>
+    <th><img src="https://imgur.com/2Xov7B7.jpeg" alt="MCP Servers" width="450"/></th>
+    <th><img src="https://imgur.com/pJcmF5u.jpeg" alt="Studio" width="450"/></th>
   </tr>
   <tr>
     <th>A comprehensive collection of Model Context Protocol (MCP) servers.</th>
     <th>A lightweight, open, and extensible multi-LLM interaction studio.</th>
   </tr>
-<tr>
-  <th>
-    <a href="https://github.com/TensorBlock/awesome-mcp-servers" target="_blank" style="
-      display: inline-block;
-      padding: 8px 16px;
-      background-color: #FF7F50;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-      font-family: sans-serif;
-    ">👀 See what we built 👀</a>
-  </th>
-  <th>
-    <a href="https://github.com/TensorBlock/TensorBlock-Studio" target="_blank" style="
-      display: inline-block;
-      padding: 8px 16px;
-      background-color: #FF7F50;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-      font-family: sans-serif;
-    ">👀 See what we built 👀</a>
-  </th>
-</tr>
+  <tr>
+    <th>
+      <a href="https://github.com/TensorBlock/awesome-mcp-servers" target="_blank" style="
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #FF7F50;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+        font-family: sans-serif;
+      ">👀 See what we built 👀</a>
+    </th>
+    <th>
+      <a href="https://github.com/TensorBlock/TensorBlock-Studio" target="_blank" style="
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #FF7F50;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+        font-family: sans-serif;
+      ">👀 See what we built 👀</a>
+    </th>
+  </tr>
 </table>
 ## Prompt template
 
