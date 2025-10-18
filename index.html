@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>커스텀GPT Chat 메인</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+      .chat-container { max-width:600px; margin:60px auto; background:#111; border-radius:20px; padding:36px; }
+      .chat-box { width:100%; min-height:260px; background:#222; border-radius:8px; padding:18px; margin-bottom:16px; overflow-y:auto; }
+      .chat-msg { margin-bottom:12px; }
+      .user { text-align:right; color:#19c37d; }
+      .ai { text-align:left; color:#fff; }
+      .input-row { display:flex; gap:8px; }
+      #chat-input { flex:1; padding:10px; border-radius:5px; border:none; background:#333; color:#fff; }
+      #send-btn { padding:10px 20px; background:#19c37d; border:none; border-radius:5px; color:#fff; cursor:pointer; }
+      .select-gpt { margin-bottom:15px; }
+    </style>
+</head>
+<body>
+  <div class="chat-container">
+    <h1>커스텀GPT Chat</h1>
+    <div class="select-gpt">
+      <label>커스텀GPT 선택:
+        <select id="gpt-selector"></select>
+      </label>
+    </div>
+    <div class="chat-box" id="chat-box"></div>
+    <div class="input-row">
+      <input type="text" id="chat-input" placeholder="메시지를 입력하세요...">
+      <button id="send-btn" onclick="sendMessage()">전송</button>
+    </div>
+    <button style="margin-top:14px;" onclick="resetChat()">대화 리셋</button><!-- 새 버튼 추가 -->
+<button id="go-to-editor-btn" style="margin-top:14px;">커스텀GPT 에디터로 이동</button>
+
+  </div>  <script>
+    let currentGpt = '';
+    let chatHistory = [];
+
+    // GPT 목록 불러오기
+    fetch('/api/custom-gpt-list')
+      .then(res => res.json())
+      .then(data => {
+        const sel = document.getElementById('gpt-selector');
+        sel.innerHTML = '';
+        Object.entries(data.gpts).forEach(([name, info]) => {
+          const opt = document.createElement('option');
+          opt.value = name;
+          opt.innerText = `${name} (${info.model_type})`;
+          sel.appendChild(opt);
+        });
+        if (sel.options.length > 0) {
+          currentGpt = sel.options[0].value;
+        }
+        sel.onchange = function() {
+          currentGpt = this.value;
+          resetChat();
+        }
+      });
+
+    function appendMsg(sender, text) {
+      const box = document.getElementById('chat-box');
+      const div = document.createElement('div');
+      div.className = 'chat-msg ' + (sender === '나' ? 'user' : 'ai');
+      div.innerText = sender + ': ' + text;
+      box.appendChild(div);
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('chat-input');
+      const msg = input.value.trim();
+      if (!msg) return;
+      appendMsg('나', msg);
+      chatHistory.push({role:'user',content:msg});
+      input.value = '';
+      // 실제 GPT 응답 연동 예시 (아직은 에코)
+      fetch('/api/custom-gpt-data?name=' + encodeURIComponent(currentGpt))
+        .then(res => res.json())
+        .then(gpt => {
+          let reply = `[${gpt.system_prompt||''}] ${gpt.instruction||''} (에코)`;
+          appendMsg(currentGpt, reply);
+          chatHistory.push({role:'assistant',content:reply});
+        });
+    }
+
+    function resetChat() {
+      chatHistory = [];
+      document.getElementById('chat-box').innerHTML = '';
+    }
+
+    // 커스텀GPT 에디터로 이동 버튼 동작
+    document.getElementById('go-to-editor-btn').addEventListener('click', () => {
+      window.location.href = 'custom_gpt_editor.html';
+    });
+  </script></body>
+</html>

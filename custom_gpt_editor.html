@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>커스텀GPT 에디터</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div id="editor-container">
+    <h2>커스텀GPT 에디터</h2>
+    <!-- 모델 업로드 폼 -->
+    <form id="model-upload-form" enctype="multipart/form-data" method="post" action="/upload-model" style="margin-bottom:20px;">
+      <label>모델 파일 업로드 (.gguf):</label>
+      <input type="file" name="model_file" accept=".gguf" required>
+      <button type="submit">업로드</button>
+    </form>
+    <div id="gpt-list"></div>
+    <hr style="margin:22px 0;">
+    <form id="gpt-form">
+      <label>이름 <input type="text" id="gpt-name" required></label>
+      <label>시스템 프롬프트 <textarea id="gpt-system-prompt" rows="3" placeholder="예: Decensor v1 프롬프트, 기타..."></textarea></label>
+      <label>지침(Instruction) <textarea id="gpt-instruction" rows="2" placeholder="예: 답변은 항상 한국어로, ..."></textarea></label>
+      <label>모델 타입
+        <select id="gpt-model-type" required>
+          <option value="localai">LocalAI (gguf)</option>
+          <option value="hf">HuggingFace</option>
+          <option value="api">Custom API</option>
+        </select>
+      </label>
+      <label>모델
+        <select id="gpt-model"></select>
+      </label>
+      <label>API URL <input type="text" id="gpt-api-url" placeholder="API 타입일 때만"></label>
+      <button type="submit" id="save-btn">저장</button>
+      <button type="button" onclick="clearForm()">새로 만들기</button>
+      <button type="button" onclick="deleteGPT()" style="background:#e74c3c;">삭제</button>
+    </form>
+  </div>
+  <script>
+    let customGpts = {};
+    let editingName = null;
+
+    function updateModelList() {
+      const type = document.getElementById('gpt-model-type').value;
+      fetch('/api/model-list?type=' + type)
+        .then(res => res.json())
+        .then(data => {
+          const sel = document.getElementById('gpt-model');
+          sel.innerHTML = '';
+          data.models.forEach(m => {
+            const opt = document.createElement('option');
+            opt.value = m;
+            opt.innerText = m;
+            sel.appendChild(opt);
+          });
+        });
+    }
+
+    document.getElementById('gpt-model-type').addEventListener('change', updateModelList);
+
+    // GPT 목록 출력
+    function renderGPTList() {
+      fetch('/api/custom-gpt-list')
+        .then(res => res.json())
+        .then(data => {
+          customGpts = data.gpts;
+          const listDiv = document.getElementById('gpt-list');
+          listDiv.innerHTML = '';
+          Object.keys(customGpts).forEach(name => {
+            const div = document.createElement('div');
+            div.className = 'gpt-list-item';
+            div.innerText = `${name} (${customGpts[name].model_type}: ${customGpts[name].model})`;
+            div.onclick = () => editGPT(name);
+            listDiv.appendChild(div);
+          });
+        });
+    }
+
+    // 폼 입력값으로 저장/수정
+    document.getElementById('gpt-form').onsubmit = function(e) {
+      e.preventDefault();
+      const name = document.getElementById('gpt-name').value.trim();
+      const systemPrompt = document.getElementById('gpt-system-prompt').value;
+      const instruction = document.getElementById('gpt-instruction').value;
+      const modelType = document.getElementById('gpt-model-type').value;
+      const model = document.getElementById('gpt-model').value;
+      const apiUrl = document.getElementById('gpt-api-url').value;
+      fetch('/api/custom-gpt', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          name: name,
+          system_prompt: systemPrompt,
+          instruction: instruction,
+          model_type: modelType,
+          model: model,
+          api_url: apiUrl
+        })
+      }).then(() => {
+        editingName = name;
+        alert('저장 완료!');
+        renderGPTList();
+      });
+    };
+
+    // GPT 선택시 폼에 불러오기
+    function editGPT(name) {
+      editingName = name;
+      fetch('/api/custom-gpt-data?name=' + encodeURIComponent(name))
+        .then(res => res.json())
+        .then(g => {
+          document.getElementById('gpt-name').value = name;
+          document.getElementById('gpt-system-prompt').value = g.system_prompt;
+          document.getElementById('gpt-instruction').value = g.instruction || '';
+          document.getElementById('gpt-model-type').value = g.model_type;
+          updateModelList();
+          setTimeout(() => {
+            document.getElementById('gpt-model').value = g.model;
+          }, 100);
+          document.getElementById('gpt-api-url').value = g.api_url || '';
+        });
+    }
+
+    function clearForm() {
+      editingName = null;
+      document.getElementById('gpt-form').reset();
+      updateModelList();
+    }
+
+    function deleteGPT() {
+      if (!editingName) { alert('선택된 GPT가 없습니다!'); return; }
+      if (confirm('정말 삭제할까요?')) {
+        fetch('/api/custom-gpt-delete', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({name: editingName})
+        }).then(() => {
+          editingName = null;
+          clearForm();
+          renderGPTList();
+        });
+      }
+    }
+
+    // 초기 세팅
+    updateModelList();
+    renderGPTList();
+  </script>
+</body>
+</html>
